@@ -1,11 +1,21 @@
-generated: '2026-07-11'
+generated: '2026-09-04'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
 - host: www.sempra.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep 14 01:01:29 2026 GMT
+  cert_expires: Nov 12 06:11:12 2026 GMT
+  hsts: null
+- host: developer.sempra.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Dec 27 23:59:59 2026 GMT
+  hsts: null
+- host: api.sempra.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Jan 21 23:59:59 2027 GMT
   hsts: null
 domains:
 - domain: sempra.com

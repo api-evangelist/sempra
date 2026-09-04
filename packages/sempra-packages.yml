@@ -1,0 +1,32 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  Unauthenticated registry searches on 2026-09-04 — registry.npmjs.org search API
+  (0 results for "sempra"), pypi.org/pypi/sempra/json and pypi.org/pypi/pysempra/json
+  (HTTP 404), rubygems.org/api/v1/gems/sempra.json (HTTP 404),
+  crates.io/api/v1/crates/sempra (HTTP 404) — plus a GitHub organization lookup. The
+  Apigee developer portal at developer.sempra.com publishes no SDK or download page; its
+  anonymous API catalog is empty.
+package_count: 0
+official_package_count: 0
+packages: []
+note: >-
+  Sempra publishes no first-party client library, SDK, CLI or CDN-distributed build in
+  any public package registry, and operates no public GitHub organization. github.com/Sempra
+  resolves (HTTP 200) but is a personal USER account, not an organization: type "User",
+  no name, no company, no blog, 0 public repositories, created 2013-12-16. It is not
+  Sempra the company, so NO GitHubOrganization pointer is emitted — a wrong org pointer
+  would credit the company with a source surface it does not run. NO SDKs pointer is
+  emitted either, because there is no official client library to count. This is a
+  verified absence, not an unchecked field, and it is consistent with the rest of the
+  profile: the API program is real (a live OAuth-protected Apigee proxy at
+  api.sempra.com/v1) but nothing about it — spec, reference, SDK — is published to
+  unauthenticated developers.
+registries_checked:
+- {registry: npm, query: 'https://registry.npmjs.org/-/v1/search?text=sempra', status: 200, results: 0}
+- {registry: pypi, query: 'https://pypi.org/pypi/sempra/json', status: 404, results: 0}
+- {registry: pypi, query: 'https://pypi.org/pypi/pysempra/json', status: 404, results: 0}
+- {registry: rubygems, query: 'https://rubygems.org/api/v1/gems/sempra.json', status: 404, results: 0}
+- {registry: crates.io, query: 'https://crates.io/api/v1/crates/sempra', status: 404, results: 0}
+- {registry: github, query: 'https://api.github.com/users/sempra', status: 200, results: 0, detail: 'type User, 0 public repos, unrelated personal account'}
+- {registry: github, query: 'https://github.com/sempra-energy', status: 404, results: 0}

@@ -1,40 +1,165 @@
+name: Sempra
 aid: sempra
 deliveryModel:
   model: unknown
   open_source: false
   commercial: false
-  callable_host: false
-  label: Delivery model not determined — needs a product licence on record
+  callable_host: true
+  label: >-
+    Callable host confirmed (an OAuth-protected Apigee proxy is routed at
+    https://api.sempra.com/v1) but no product licence, plan or contract is published
   confidence: low
   source:
-  - none
-  generated: '2026-08-28'
-  method: derived
+  - https://api.sempra.com/v1
+  generated: '2026-09-04'
+  method: probed
 specificationVersion: '0.23'
 accessModel:
   pricing: unknown
-  onboarding: unknown
+  onboarding: registration
   trial: false
   try_now: false
   public: false
-  label: Unknown
-  confidence: low
-  source: []
-  generated: '2026-07-22'
-  method: derived
+  label: Registration required — developer.sempra.com portal, nothing published anonymously
+  confidence: medium
+  source:
+  - https://developer.sempra.com/portals/api/sites/sempra-prod/liveportal/apis
+  generated: '2026-09-04'
+  method: probed
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sempra.png
-url: 
+url: >-
   https://raw.githubusercontent.com/api-evangelist/sempra/refs/heads/main/apis.yml
-modified: '2026-03-21'
-apis: []
+created: '2026-03-21'
+modified: '2026-09-04'
+tags:
+  - Energy
+  - Utilities
+  - Natural Gas
+  - Electricity
+  - Energy Infrastructure
+  - LNG
+  - Apigee
+  - Fortune 500
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+apis:
+  - name: Sempra Developer Portal APIs
+    description: >-
+      Sempra runs a Google Apigee API program. api.sempra.com is the Apigee runtime
+      gateway and developer.sempra.com is an Apigee integrated developer portal (Apigee
+      organization "sempra", site id "sempra-prod"). Both hosts present DigiCert EV
+      certificates issued to O=Sempra Energy, L=San Diego, ST=California, which is how
+      ownership was established. Re-probed 2026-09-04: the portal still publishes nothing
+      to anonymous visitors — its own catalog endpoint
+      /portals/api/sites/sempra-prod/liveportal/apis returns HTTP 200 with "apiDocs": []
+      and "apiProducts": [], and its header menu is exactly two items, "APIs" and
+      "Log In". No OpenAPI, reference, operation list, scope, plan or rate limit is
+      publicly reachable. Anonymous probing does establish a live proxy routed at
+      basepath /v1: every path under it (/v1, /v1/graphql, /v1/token, /v1/openapi.json)
+      returns HTTP 401 with an Apigee oauth.v2.InvalidAccessToken fault and a
+      WWW-Authenticate Bearer challenge, while /, /v2/graphql, /oauth/token and
+      /openapi.json return the Apigee messaging.adaptors.http.flow.ApplicationNotFound
+      not-routed 404. The gateway advertises GET, PUT, POST, DELETE, OPTIONS and PATCH
+      through a wildcard CORS policy, so a real read/write surface sits behind the OAuth
+      wall — but no operation, schema or scope is published.
+    humanURL: https://developer.sempra.com
+    baseURL: https://api.sempra.com/v1
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sempra.png
+    tags:
+      - Energy
+      - Utilities
+      - Apigee
+      - Developer Portal
+    properties:
+      - type: DeveloperPortal
+        url: https://developer.sempra.com
+      - type: Login
+        url: https://developer.sempra.com/login
+      - type: Authentication
+        url: authentication/sempra-authentication.yml
+      - type: ErrorCatalog
+        url: errors/sempra-problem-types.yml
 common:
-  - type: DomainSecurity
-    url: security/sempra-domain-security.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/sempra
   - type: Website
     url: https://www.sempra.com
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/sempra
+  - type: DeveloperPortal
+    url: https://developer.sempra.com
+  - type: Login
+    url: https://developer.sempra.com/login
+  - type: Blog
+    url: https://www.sempra.com/newsroom
+  - type: Support
+    url: https://www.sempra.com/contact-us
+  - type: PrivacyPolicy
+    url: https://www.sempra.com/privacy
+  - type: TermsOfService
+    url: https://www.sempra.com/terms-and-conditions
+  - type: DomainSecurity
+    url: security/sempra-domain-security.yml
+  - type: Authentication
+    url: authentication/sempra-authentication.yml
+  - type: ErrorCatalog
+    url: errors/sempra-problem-types.yml
+  - type: Conventions
+    url: conventions/sempra-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/sempra-lifecycle.yml
+  - type: Conformance
+    url: conformance/sempra-conformance.yml
+  - type: Plans
+    url: plans/sempra-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/sempra-rate-limits.yml
+  - type: Packages
+    url: packages/sempra-packages.yml
+  - type: LLMsTxt
+    url: llms/sempra-llms.txt
 description: >-
-  Sempra is a North American energy infrastructure company with operations in Texas,
-  California, Mexico, and emerging markets, serving utility customers and developing
-  energy networks.
+  Sempra is a San Diego-headquartered North American energy infrastructure holding
+  company and a Fortune 500 constituent, operating regulated utilities and energy
+  infrastructure across California, Texas and Mexico. Its businesses include San Diego
+  Gas & Electric and Southern California Gas Company in California, an ownership
+  interest in Oncor Electric Delivery in Texas, and Sempra Infrastructure, which
+  develops LNG export terminals, natural gas pipelines and renewable generation in
+  North America. Sempra operates a Google Apigee API program — an OAuth-protected
+  gateway at api.sempra.com and an integrated developer portal at developer.sempra.com
+  — and runs sibling Apigee organizations for its California utilities at
+  developer.sdge.com (site sdge-prod) and developer.socalgas.com (site socalgas-prod).
+  None of the three portals publishes an API product, contract, reference or price to an
+  unauthenticated visitor, so the entire integration surface sits behind portal
+  registration.
+x-enrichment:
+  date: '2026-09-04'
+  status: minimal
+  artifacts_added: 10
+  pass: local-v3
+x-coverage:
+  state: gated
+  reason: partner-login
+  detail: >-
+    Sempra's Google Apigee developer portal at developer.sempra.com is publicly reachable,
+    but its own anonymous catalog endpoint /portals/api/sites/sempra-prod/liveportal/apis
+    answers HTTP 200 with "apiDocs": [] and "apiProducts": [] and its header menu is
+    exactly two items, "APIs" and "Log In" — not one API product, contract or reference is
+    published to an unauthenticated visitor, while a live OAuth-protected proxy at
+    https://api.sempra.com/v1 answers every anonymous request with an Apigee
+    oauth.v2.InvalidAccessToken 401, so the API is real and callable but only by someone
+    already issued a token through that portal.
+  evidence:
+    - url: https://developer.sempra.com/portals/api/sites/sempra-prod/liveportal/apis
+      status: 200
+    - url: https://developer.sempra.com/portals/api/sites/sempra-prod/liveportal/menus
+      status: 200
+    - url: https://api.sempra.com/v1/graphql
+      status: 401
+    - url: https://api.sempra.com/openapi.json
+      status: 404
+    - url: https://api.sempra.com/.well-known/agent-card.json
+      status: 404
+    - url: https://www.sempra.com/robots.txt
+      status: 200
+  checked: '2026-09-04'

@@ -1,0 +1,76 @@
+generated: '2026-09-04'
+method: probed
+source: >-
+  Live unauthenticated probes of https://api.sempra.com and https://developer.sempra.com
+  on 2026-09-04. Sempra publishes no OpenAPI, no compliance page reachable to our crawler
+  and no standards claim on any anonymous developer surface, so every entry below is
+  either an observed protocol behaviour or an explicit not-observed. Nothing is asserted
+  from marketing prose.
+api: Sempra Developer Portal APIs
+standards:
+- id: oauth2
+  conforms: true
+  evidence: >-
+    https://api.sempra.com/v1 (HTTP 401) returns an Apigee OAuthV2
+    oauth.v2.InvalidAccessToken fault — the gateway runs an OAuth 2.0
+    VerifyAccessToken policy. Flows, grant types, scopes and endpoints are not published.
+- id: rfc6750-bearer-token
+  conforms: true
+  evidence: >-
+    WWW-Authenticate: Bearer realm="null",error="invalid_token" on
+    https://api.sempra.com/v1/graphql (HTTP 401) — an RFC 6750 bearer challenge.
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: false
+  evidence: /.well-known/oauth-authorization-server returns the Apigee not-routed 404 on api.sempra.com.
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: false
+  evidence: /.well-known/oauth-protected-resource returns the Apigee not-routed 404 on api.sempra.com.
+- id: oidc-discovery
+  conforms: false
+  evidence: /.well-known/openid-configuration returns the Apigee not-routed 404 on api.sempra.com.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors use the Google Apigee fault envelope (fault.faultstring +
+    fault.detail.errorcode) with media type application/json, not
+    application/problem+json. See errors/sempra-problem-types.yml.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: >-
+    /.well-known/security.txt is 404 on api.sempra.com, an SPA catch-all 200 on
+    developer.sempra.com and 403 (Cloudflare challenge) on www.sempra.com. No document
+    was retrieved on any host.
+- id: apis-json
+  conforms: false
+  evidence: /apis.json, /apis.yml and /.well-known/apis.json miss on every Sempra host probed.
+- id: openapi
+  conforms: false
+  evidence: >-
+    /openapi.json, /openapi.yaml, /swagger.json, /api-docs and /docs all return the
+    Apigee not-routed 404 on the API host; /v1/openapi.json is routed but returns the
+    OAuth 401. The developer portal's own anonymous catalog returns apiDocs [] and
+    apiProducts [].
+domain_standard:
+  regime: energy_utilities
+  observed: false
+  candidates_checked: [green-button, espi, ieee-2030-5, openadr, cds-energy, smart-energy-code]
+  note: >-
+    REWARD-ONLY, and nothing is claimed. No Green Button / ESPI (NAESB REQ.21) resource
+    URI, IEEE 2030.5 (SEP2) endpoint, OpenADR VTN or CIM/IEC 61968 message shape is
+    observable on any Sempra-controlled host, because the only routed proxy answers 401
+    before any payload is reachable and no contract is published. Sempra is a holding
+    company; where a North American Green Button obligation applies it applies to the
+    operating utilities — San Diego Gas & Electric and Southern California Gas — which
+    run their own Apigee organizations at developer.sdge.com (site sdge-prod) and
+    developer.socalgas.com (site socalgas-prod). Both of those portals were probed on
+    2026-09-04 and are also empty to anonymous visitors (apiDocs [], apiProducts []).
+    Guessed Green Button paths on api.sdge.com and api.socalgas.com returned 404 and
+    were not pursued further — blind path patterns are not evidence.
+compliance_program:
+  published: false
+  certifications: []
+  note: >-
+    No trust centre or certification page was retrievable. trust.sempra.com and
+    security.sempra.com do not resolve (DNS NXDOMAIN); www.sempra.com/security answers
+    403 behind the Cloudflare managed challenge. NO Compliance and NO TrustCenter
+    pointer is emitted — an unverified certification claim is worse than none.

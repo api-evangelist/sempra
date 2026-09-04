@@ -1,0 +1,26 @@
+generated: '2026-09-04'
+method: searched
+source: https://developer.sempra.com/
+docs: https://developer.sempra.com/
+plan_count: 0
+plans: []
+note: >-
+  Sempra publishes no API plans, tiers, quotas or pricing. Its Apigee integrated
+  developer portal at developer.sempra.com has exactly two header menu items — "APIs"
+  and "Log In", read from the portal's own anonymous menu endpoint
+  /portals/api/sites/sempra-prod/liveportal/menus (HTTP 200) — and no pricing page. The
+  portal's anonymous API catalog endpoint
+  /portals/api/sites/sempra-prod/liveportal/apis (HTTP 200) returns "apiDocs": [] and
+  "apiProducts": [], so there is no API product to attach a plan to. Any commercial terms
+  are settled after registration and login, not published. This is a verified zero, not
+  an unchecked field.
+evidence:
+- url: https://developer.sempra.com/portals/api/sites/sempra-prod/liveportal/apis
+  status: 200
+  detail: '{"apiDocs":[],"apiProducts":[],"apiCategoryList":[{"name":"DEV"},{"name":"Use Case"}]}'
+- url: https://developer.sempra.com/portals/api/sites/sempra-prod/liveportal/menus
+  status: 200
+  detail: 'headerMenus = ["APIs"], ["Log In"]; no pricing or plans menu item.'
+- url: https://api.sempra.com/v1
+  status: 401
+  detail: Routed proxy rejects anonymously; no product or plan metadata is exposed.

@@ -1,0 +1,29 @@
+generated: '2026-09-04'
+method: searched
+source: https://developer.sempra.com/
+docs: https://developer.sempra.com/
+limit_count: 0
+limits: []
+response_headers: []
+exhaustion_status: null
+note: >-
+  Sempra documents no rate limits, quotas, burst allowances or throttling response
+  headers on any public surface. The API program runs on Google Apigee, where Quota and
+  SpikeArrest policies are common — but nothing about them is published, and the routed
+  /v1 proxy rejects every anonymous request at the OAuthV2 policy (HTTP 401) before a
+  quota policy could emit a header, so no live rate-limit signal is observable. No
+  X-RateLimit-*, RateLimit-* or Retry-After header appeared on any response captured on
+  2026-09-04. This is a documented absence, not an inference that limits do not exist.
+evidence:
+- url: https://api.sempra.com/v1/graphql
+  status: 401
+  detail: >-
+    Routed Apigee proxy. Response headers observed were WWW-Authenticate, Content-Type,
+    Access-Control-Allow-Origin/Headers/Methods/Max-Age, Content-Security-Policy and
+    Strict-Transport-Security. No rate-limit header of any family.
+- url: https://api.sempra.com/
+  status: 404
+  detail: Apigee messaging.adaptors.http.flow.ApplicationNotFound fault; no rate-limit headers.
+- url: https://developer.sempra.com/portals/api/sites/sempra-prod/liveportal/apis
+  status: 200
+  detail: Anonymous API catalog is empty (apiDocs [], apiProducts []) — no product whose limits could be read.

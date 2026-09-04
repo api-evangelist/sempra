@@ -1,0 +1,127 @@
+generated: '2026-09-04'
+method: probed
+source: >-
+  Direct unauthenticated HTTP probes on 2026-09-04 of every host this record knows —
+  the registrable domain sempra.com and www.sempra.com, the Apigee runtime gateway
+  api.sempra.com (the apis[].baseURL host) and the Apigee integrated developer portal
+  developer.sempra.com (the apis[].humanURL host). api.sempra.com and
+  developer.sempra.com present DigiCert EV certificates with subject O=Sempra Energy,
+  L=San Diego, ST=California, C=US, which is how host ownership was established.
+note: >-
+  No /.well-known document is served by any Sempra host. api.sempra.com is an Apigee
+  runtime and answers every unrouted path with a genuine Apigee
+  messaging.adaptors.http.flow.ApplicationNotFound JSON fault (404) — real negatives.
+  developer.sempra.com is an Angular single-page app with a catch-all route: it returns
+  HTTP 200 and the identical 2,138-byte index.html shell for EVERY path, INCLUDING the
+  negative-control path that cannot exist, so every 200 on that host is recorded as a
+  miss. www.sempra.com and sempra.com sit behind a Cloudflare managed challenge and
+  answered 403 ("Just a moment..." interstitial) on every path except /robots.txt.
+  NO WellKnown and NO SecurityTxt pointer is emitted in apis.yml, because not one path
+  returned a real document.
+hit_count: 0
+path_echo_control: passed
+soft_404_control:
+  developer.sempra.com: failed
+  api.sempra.com: passed
+  www.sempra.com: not-applicable
+hosts:
+- host: api.sempra.com
+  note: >-
+    Apigee API gateway runtime (apis[].baseURL host). Returns real JSON 404 faults, not
+    an SPA catch-all — the negative control returned 404, so these negatives are trusted.
+  documents:
+  - {path: /.well-known/security.txt, status: 404, file: null}
+  - {path: /.well-known/openid-configuration, status: 404, file: null}
+  - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+  - {path: /.well-known/oauth-protected-resource, status: 404, file: null}
+  - {path: /.well-known/api-catalog, status: 404, file: null}
+  - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+  - {path: /.well-known/apis.json, status: 404, file: null}
+  - {path: /apis.json, status: 404, file: null}
+  - {path: /apis.yml, status: 404, file: null}
+  - {path: /.well-known/agent-card.json, status: 404, file: null}
+  - {path: /.well-known/agent.json, status: 404, file: null}
+  - {path: /.well-known/aauth-resource.json, status: 404, file: null}
+  - path: /.well-known/sempra-negative-control-7f3ab91c.json
+    status: 404
+    file: null
+    result: control-passed
+    detail: >-
+      Negative control. A path that cannot exist returned the same Apigee not-routed 404,
+      so this host does not echo paths and its negatives above are real.
+- host: developer.sempra.com
+  note: >-
+    Apigee integrated developer portal, Angular SPA, Apigee organization "sempra", site
+    id "sempra-prod" (read from https://developer.sempra.com/siteid, HTTP 200, body
+    "sempra-prod"). Every path returns 200 with the identical 2,138-byte HTML shell.
+    THE NEGATIVE CONTROL ALSO RETURNED 200 WITH THE SAME SHELL, so every 200 on this
+    host is a catch-all, not a document. All rows are misses.
+  documents:
+  - {path: /.well-known/security.txt, status: 200, file: null, result: miss, detail: 'SPA shell (text/html, 2138 bytes) — not a security.txt.'}
+  - {path: /.well-known/openid-configuration, status: 200, file: null, result: miss, detail: 'SPA shell (text/html, 2138 bytes) — not JSON.'}
+  - {path: /.well-known/oauth-authorization-server, status: 200, file: null, result: miss, detail: 'SPA shell (text/html, 2138 bytes) — not JSON.'}
+  - {path: /.well-known/oauth-protected-resource, status: 200, file: null, result: miss, detail: 'SPA shell (text/html, 2138 bytes) — not JSON.'}
+  - {path: /.well-known/api-catalog, status: 200, file: null, result: miss, detail: 'SPA shell (text/html, 2138 bytes) — not a linkset.'}
+  - {path: /.well-known/ai-plugin.json, status: 200, file: null, result: miss, detail: 'SPA shell (text/html, 2138 bytes) — not JSON.'}
+  - {path: /.well-known/apis.json, status: 200, file: null, result: miss, detail: 'SPA shell — no apis[] or specificationVersion member.'}
+  - {path: /apis.json, status: 200, file: null, result: miss, detail: 'SPA shell — no apis[] or specificationVersion member.'}
+  - {path: /apis.yml, status: 200, file: null, result: miss, detail: 'SPA shell (text/html) — not YAML.'}
+  - {path: /.well-known/agent-card.json, status: 200, file: null, result: miss, detail: 'SPA shell — not an A2A AgentCard JSON object.'}
+  - {path: /.well-known/agent.json, status: 200, file: null, result: miss, detail: 'SPA shell — not an A2A AgentCard JSON object.'}
+  - {path: /.well-known/aauth-resource.json, status: 200, file: null, result: miss, detail: 'SPA shell — no issuer or jwks_uri member.'}
+  - path: /.well-known/sempra-negative-control-7f3ab91c.json
+    status: 200
+    file: null
+    result: control-failed
+    detail: >-
+      Negative control. A path that cannot exist returned HTTP 200 and the same
+      2,138-byte SPA shell, which discards every 200 on this host as a hit.
+- host: www.sempra.com
+  note: >-
+    Corporate site behind a Cloudflare managed challenge. Every path except /robots.txt
+    answered 403 with the "Just a moment..." challenge interstitial, with a browser
+    User-Agent and full browser headers. This is our crawler being turned away, not
+    evidence about what the origin serves.
+  documents:
+  - path: /robots.txt
+    status: 200
+    file: null
+    result: served
+    detail: >-
+      Cloudflare-managed robots.txt. Content-Signal search=yes, ai-train=no,
+      use=reference; ClaudeBot, GPTBot, CCBot, Google-Extended, Amazonbot,
+      Applebot-Extended, Bytespider, meta-externalagent and
+      CloudflareBrowserRenderingCrawler are Disallow: /.
+  - {path: /.well-known/security.txt, status: 403, file: null}
+  - {path: /.well-known/openid-configuration, status: 403, file: null}
+  - {path: /.well-known/oauth-authorization-server, status: 403, file: null}
+  - {path: /.well-known/oauth-protected-resource, status: 403, file: null}
+  - {path: /.well-known/api-catalog, status: 403, file: null}
+  - {path: /.well-known/ai-plugin.json, status: 403, file: null}
+  - {path: /.well-known/apis.json, status: 403, file: null}
+  - {path: /apis.json, status: 403, file: null}
+  - {path: /apis.yml, status: 403, file: null}
+  - {path: /.well-known/agent-card.json, status: 403, file: null}
+  - {path: /.well-known/agent.json, status: 403, file: null}
+  - {path: /.well-known/aauth-resource.json, status: 403, file: null}
+  - {path: /llms.txt, status: 403, file: null}
+  - path: /.well-known/sempra-negative-control-7f3ab91c.json
+    status: 403
+    file: null
+    result: control-passed
+    detail: Negative control also challenged; the host answers nothing to our crawler.
+- host: sempra.com
+  note: Apex; same Cloudflare managed challenge as www.sempra.com.
+  documents:
+  - {path: /.well-known/security.txt, status: 403, file: null}
+  - {path: /.well-known/openid-configuration, status: 403, file: null}
+  - {path: /.well-known/oauth-authorization-server, status: 403, file: null}
+  - {path: /.well-known/oauth-protected-resource, status: 403, file: null}
+  - {path: /.well-known/api-catalog, status: 403, file: null}
+  - {path: /.well-known/ai-plugin.json, status: 403, file: null}
+  - {path: /.well-known/apis.json, status: 403, file: null}
+  - {path: /apis.json, status: 403, file: null}
+  - {path: /apis.yml, status: 403, file: null}
+  - {path: /.well-known/agent-card.json, status: 403, file: null}
+  - {path: /.well-known/agent.json, status: 403, file: null}
+  - {path: /.well-known/aauth-resource.json, status: 403, file: null}

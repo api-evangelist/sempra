@@ -1,0 +1,43 @@
+generated: '2026-09-04'
+method: probed
+source: >-
+  Live unauthenticated probes of https://api.sempra.com and https://developer.sempra.com
+  on 2026-09-04, plus a search of the public Sempra corporate site for a status,
+  versioning, deprecation or SLA page.
+api: Sempra Developer Portal APIs
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: null
+  method: probed
+  detail: >-
+    Established by routing behaviour, not by a published policy: https://api.sempra.com/v1
+    and every path under it return an Apigee OAuth 401, while https://api.sempra.com/v2/graphql
+    returns the Apigee not-routed 404. v1 is the only deployed basepath found.
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: >-
+    No deprecation policy, Sunset/Deprecation header support (RFC 8594) or end-of-life
+    notice is published on any anonymous surface. NO Deprecation pointer is emitted.
+sla:
+  url: null
+  uptime_target: null
+  note: No API SLA or uptime commitment is published to unauthenticated visitors.
+status_page: null
+status_page_note: >-
+  No API status page exists. status.sempra.com does not resolve (DNS NXDOMAIN) and the
+  developer portal's header menu is exactly two items, "APIs" and "Log In" — no status,
+  changelog or support entry. Sempra's utilities publish consumer outage maps, which are
+  not an API status page. NO StatusPage pointer is emitted.
+changelog: null
+changelog_note: >-
+  No API changelog or release-notes surface is published; changelog/ is deliberately not
+  written rather than filled with a corporate press-release feed, which is a different
+  artifact and already captured in blogs/.
+deprecated_operations: []
+evidence:
+- {url: 'https://api.sempra.com/v1', status: 401}
+- {url: 'https://api.sempra.com/v2/graphql', status: 404}
+- {url: 'https://developer.sempra.com/portals/api/sites/sempra-prod/liveportal/menus', status: 200}
+- {url: 'https://status.sempra.com/', status: 0, detail: 'DNS does not resolve'}
