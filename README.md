@@ -1,4 +1,4 @@
-# Sempra (sempra)
+# Sempra
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,35 +64,100 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Sempra is a Fortune 500 company. This repository captures the APIs, developer tools, and machine-readable API artifacts for Sempra.
+Sempra is a San Diego-headquartered North American energy infrastructure holding company and a Fortune 500 constituent, operating regulated utilities and energy infrastructure across California, Texas and Mexico. Its businesses include San Diego Gas & Electric and Southern California Gas Company in California, an ownership interest in Oncor Electric Delivery in Texas, and Sempra Infrastructure, which develops LNG export terminals, natural gas pipelines and renewable generation in North America. Sempra operates a Google Apigee API program — an OAuth-protected gateway at api.sempra.com and an integrated developer portal at developer.sempra.com — and runs sibling Apigee organizations for its California utilities at developer.sdge.com (site sdge-prod) and developer.socalgas.com (site socalgas-prod). None of the three portals publishes an API product, contract, reference or price to an unauthenticated visitor, so the entire integration surface sits behind portal registration.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/sempra/refs/heads/main/apis.yml)
+**Areas:** Energy · Utilities · Natural Gas · Electricity · Energy Infrastructure · LNG · Apigee · Fortune 500
 
-## Scope
+## Sempra on APIs.io
 
-- **Type:** Contract
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for Sempra is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/sempra/](https://apis.io/providers/sempra/)** — or go straight to one of the APIs or properties below.
 
-## Tags:
+### APIs (1)
 
- - Fortune 500
+- [Sempra Developer Portal APIs](https://apis.io/apis/sempra/sempra-developer-portal-apis/) — Sempra runs a Google Apigee API program. api.sempra.com is the Apigee runtime gateway and developer.sempra.com is an Apigee integrated developer portal…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-21
-- **Modified:** 2026-03-21
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Security (2)
 
-No public APIs have been documented yet. Contributions welcome.
+Authentication, trust centre, and vulnerability disclosure.
 
-## Common Properties
+- [Sempra Authentication](https://apis.io/security/sempra/sempra-authentication/)
+- [Sempra Domain Security](https://apis.io/security/sempra/sempra-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Sempra Plans Pricing](https://apis.io/plans/sempra/sempra-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Sempra Rate Limits](https://apis.io/rate-limits/sempra/sempra-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.sempra.com)
+- [Support](https://www.sempra.com/contact-us)
+- [Blog](https://www.sempra.com/newsroom)
+- [Terms of service](https://www.sempra.com/terms-and-conditions)
+- [Privacy policy](https://www.sempra.com/privacy)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** API Evangelist
+**Kin Score 19.2** — emerging · rubric 0.24.0 · scored 2026-10-17
 
-**Email:** info@apievangelist.com
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 27.6 |
+
+**Agent readiness 7.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.5** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/sempra/](https://apis.io/providers/sempra/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Sempra: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/sempra/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
